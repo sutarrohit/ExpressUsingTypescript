@@ -45,6 +45,12 @@ export const signup = catchAsync(async (req: Request, res: Response, next: NextF
 
   const jwtToken = await signToken(newUser._id);
 
+  res.cookie("token", jwtToken, {
+    httpOnly: false,
+    secure: false,
+    expires: new Date(Date.now() + 900000),
+  });
+
   res.status(200).json({
     status: "success",
     message: "User created successfully",
@@ -65,6 +71,12 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
     throw new AppError("Incorrect email and password", 401);
 
   const jwtToken = await signToken(user._id);
+
+  res.cookie("token", jwtToken, {
+    httpOnly: false,
+    secure: false,
+    expires: new Date(Date.now() + 900000),
+  });
 
   res.status(200).json({
     status: "success",
@@ -130,6 +142,13 @@ export const resetPassowrd = catchAsync(async (req: Request, res: Response, next
 
   // Login the user and send JWT token.
   const jwtToken = await signToken(user._id);
+
+  res.cookie("token", jwtToken, {
+    httpOnly: false,
+    secure: false,
+    expires: new Date(Date.now() + 900000),
+  });
+
   res.status(200).json({
     status: "success",
     message: "Password changed successfully",
@@ -154,6 +173,12 @@ export const updatePassword = catchAsync(async (req: Request, res: Response, nex
   await user.save();
 
   const jwtToken = await signToken(user._id);
+
+  res.cookie("token", jwtToken, {
+    httpOnly: false,
+    secure: false,
+    expires: new Date(Date.now() + 900000),
+  });
 
   res.status(200).json({
     status: "success",

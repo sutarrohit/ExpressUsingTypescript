@@ -13,6 +13,8 @@ import userRoutes from "./routes/userRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import courseRoutes from "./routes/courseRoutes";
 
+import cookieParser from "cookie-parser";
+
 declare global {
   namespace Express {
     interface Request {
@@ -23,6 +25,8 @@ declare global {
 
 dotenv.config();
 const app: Express = express();
+
+app.use(cookieParser());
 
 //----- Middlewares -----
 app.use(express.json({ limit: "100kb" }));
@@ -56,6 +60,12 @@ const limiter = rateLimit({
   message: "Too many request from this ip, Please try again",
 });
 app.use(limiter);
+
+app.get("/", (req, res) => {
+  res.json({
+    msg: "Rohit",
+  });
+});
 
 //----- Endpoints ----
 app.use("/api/v1/user/", userRoutes);
