@@ -64,8 +64,8 @@ export const updateCourse = async (req: Request, res: Response, next: NextFuncti
   });
 };
 
-// Purchease course
-export const purcheaseCourse = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+// purchaseCourse course
+export const purchaseCourse = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const course = await Course.findOne({ _id: req.params.courseId });
   if (!course) throw new AppError("Course doesn't exits", 404);
 

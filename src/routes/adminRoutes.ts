@@ -12,16 +12,16 @@ import {
 } from "../controllers/adminControllers";
 const adminRoutes: Router = express.Router();
 
+// Admin Profile Routes
 adminRoutes.route("/me").get(protect, protectAdmin, getAdmin);
+adminRoutes.route("/me").patch(protect, protectAdmin, updateAdmin);
+adminRoutes.route("/me").delete(protect, protectAdmin, deleteAdmin);
 
-adminRoutes.route("/signup").post(adminSignup);
-adminRoutes.route("/login").post(adminLogin);
-
-adminRoutes.route("/forgotPassword").post(adminForgotPassword);
-adminRoutes.route("/resetPassword/:token").patch(adminResetPassword);
-adminRoutes.route("/updatePassword").post(protect, protectAdmin, adminUpdatePassword);
-
-adminRoutes.route("/updateAdmin").patch(protect, protectAdmin, updateAdmin);
-adminRoutes.route("/deleteAdmin").delete(protect, protectAdmin, deleteAdmin);
+// Admin Auth Routes
+adminRoutes.route("/auth/signup").post(adminSignup);
+adminRoutes.route("/auth/login").post(adminLogin);
+adminRoutes.route("/auth/forgot-password").post(adminForgotPassword);
+adminRoutes.route("/auth/reset-password/:token").patch(adminResetPassword);
+adminRoutes.route("/auth/update-password").patch(protect, protectAdmin, adminUpdatePassword);
 
 export default adminRoutes;

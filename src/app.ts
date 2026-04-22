@@ -68,9 +68,9 @@ app.get("/", (req, res) => {
 });
 
 //----- Endpoints ----
-app.use("/api/v1/user/", userRoutes);
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/admin", adminRoutes);
-app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/courses", courseRoutes);
 
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
   const err = new AppError(`Can't find ${req.originalUrl} on this server`, 404);

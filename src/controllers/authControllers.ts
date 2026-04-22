@@ -124,8 +124,8 @@ export const forgetPassword = catchAsync(async (req: Request, res: Response, nex
   });
 });
 
-// Reset Passowrd
-export const resetPassowrd = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+// Reset resetPassword
+export const resetPassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   //Get user based on the token
   const hashedToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
   const user = await User.findOne({ passwordResetToken: hashedToken, passwordResetExpires: { $gt: Date.now() } });

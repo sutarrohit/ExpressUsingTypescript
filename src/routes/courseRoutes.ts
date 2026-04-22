@@ -4,19 +4,18 @@ import {
   createCourse,
   getOneCourse,
   updateCourse,
-  purcheaseCourse,
+  purchaseCourse,
   broughtCourses,
 } from "../controllers/courseController";
 import { protect, protectAdmin } from "../controllers/authControllers";
 
 const courseRoutes: Router = express.Router();
 
-courseRoutes.route("/courses").get(protect, protectAdmin, getCourses);
-courseRoutes.route("/courses/:courseId").get(getOneCourse);
-courseRoutes.route("/createCourse").post(protect, protectAdmin, createCourse);
-courseRoutes.route("/updateCourse/:courseId").patch(protect, protectAdmin, updateCourse);
-courseRoutes.route("/purcheaseCourse/:courseId").post(protect, purcheaseCourse);
-
-courseRoutes.route("/broughtCourses").get(protect, broughtCourses);
+courseRoutes.route("/").get(protect, protectAdmin, getCourses);
+courseRoutes.route("/:courseId").get(getOneCourse);
+courseRoutes.route("/").post(protect, protectAdmin, createCourse);
+courseRoutes.route("/:courseId").patch(protect, protectAdmin, updateCourse);
+courseRoutes.route("/:courseId/purchase").post(protect, purchaseCourse);
+courseRoutes.route("/purchased").get(protect, broughtCourses);
 
 export default courseRoutes;
